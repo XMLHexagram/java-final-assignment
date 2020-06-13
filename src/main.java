@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 public class main {
     public static void main(String[] args) {
         test tester = new test();
@@ -98,15 +96,33 @@ class Student {
 }
 
 class test {
+    Student[] aClass;
+
     public void output() {
-//        Student xiaoming = new Student("xiaoming",180,60,"19050522","18969067887","19052220");
-//        xiaoming.PersonalInfo();
-//        System.out.println(xiaoming.isFat());
-        Student[] aClass = new Student[3];
-        for (int i = 0; i < aClass.length; i++) {
-            aClass[i] = new Student();
-            aClass[i].PersonalInfo();
+        this.createClass();
+        this.findStudent("xiaoming","19052220");
+
+    }
+
+    private void createClass(){
+        this.aClass = new Student[3];
+        for (int i = 0; i < this.aClass.length; i++) {
+            this.aClass[i] = new Student();
+            this.aClass[i].PersonalInfo();
         }
+        this.aClass[0]= new Student("xiaoming",180,60,"19050522","18969067887","19052220");
+    }
+
+    private void findStudent(String name,String ID){
+        for (int i = 0; i < this.aClass.length; i++) {
+
+            if (this.aClass[i].getName() == name && this.aClass[i].getID() == ID){
+                System.out.println("find");
+                this.aClass[i].PersonalInfo();
+                return;
+            }
+        }
+        System.out.println("can't find");
 
     }
 }
