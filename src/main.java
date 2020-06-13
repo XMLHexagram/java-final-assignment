@@ -1,11 +1,12 @@
-import java.nio.charset.Charset;
 import java.util.Random;
 
 public class main {
     public static void main(String[] args) {
-        class_ tempClass = new class_();
-        tempClass.output();
-        layout test = new layout();
+        SignInView frame = new SignInView();
+        frame.setTitle("登录");
+        frame.pack();
+        frame.setVisible(true);
+
 
     }
 }
@@ -41,6 +42,18 @@ class Student {
         }
         String generatedString = buffer.toString();
         return generatedString;
+    }
+
+    @Override
+    public String toString() {
+        return "学号是: " + this.getID() + "\n" +
+                "名字是: " + this.getName() + "\n" +
+                "班级是: " + this.getClassName() + "\n" +
+                "身高: " + this.getHeight() + "\n" +
+                "体重 " + this.getWeight() + "\n" +
+                "电话号码是: " + this.getPhone() + "\n";
+
+//        return "Student{}";
     }
 
     public String getName() {
@@ -122,12 +135,20 @@ class Student {
 }
 
 class class_ {
-    Student[] aClass;
+    private Student[] aClass;
 
-    public void output() {
+    public class_() {
         this.createClass();
+    }
+
+    public String output() {
         this.findStudent("xiaoming", "19052220");
         this.randomGetFive();
+        String temp = "";
+        for (int i = 0; i < aClass.length; i++) {
+            temp = temp + aClass[i].toString() + "\n";
+        }
+        return temp;
     }
 
     private void createClass() {
@@ -138,7 +159,7 @@ class class_ {
         this.aClass[0] = new Student("xiaoming", 180, 60, "19050522", "18969067887", "19052220");
     }
 
-    private void findStudent(String name, String ID) {
+    public void findStudent(String name, String ID) {
         for (int i = 0; i < this.aClass.length; i++) {
 
             if (this.aClass[i].getName() == name && this.aClass[i].getID() == ID) {
@@ -151,9 +172,37 @@ class class_ {
 
     }
 
-    private void randomGetFive() {
-        for (int i = 0; i < 5; i++) {
-            this.aClass[(int) (Math.random() * this.aClass.length / 5) + (i * this.aClass.length / 5)].PersonalInfo();
+    public String randomGetFive() {
+        String temp = "";
+        int[] repeat = new int[5];
+        Boolean flag = true;
+        int tempInt;
+        int i;
+        for (i = 0; i < 5; i++) {
+            repeat[i] = 0;
         }
+        i = 0;
+        while (flag) {
+//            System.out.println(Math.random());
+//            System.out.println(this.aClass.length);
+//            System.out.println(this.aClass);
+            tempInt = (int) (Math.random() * this.aClass.length);
+            for (int j = 0; j < 5; j++) {
+                if (repeat[j] == tempInt) {
+                    continue;
+                }
+
+            }
+            repeat[i] = tempInt;
+            if (i >= 4) {
+                flag = false;
+            }
+            i++;
+        }
+        for (i = 0; i < 5; i++) {
+            temp = temp + aClass[repeat[i]].toString() + "\n";
+            System.out.println(repeat[i]+"\n");
+        }
+        return temp;
     }
 }
