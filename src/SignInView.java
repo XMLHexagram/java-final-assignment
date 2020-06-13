@@ -2,11 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class SignInView extends JFrame {
     private final JTextField textField = new JTextField(15);
     private final JPasswordField passwordField = new JPasswordField(15);
     private final JTextArea textArea = new JTextArea(6, 32);
+    private final JButton jButton = new JButton();
     private final static String newline = "\n";
 
     public SignInView() {
@@ -17,6 +19,22 @@ public class SignInView extends JFrame {
         textField.setText("123456");
         passwordField.setToolTipText("接受密码输入");
         passwordField.setText("123456");
+
+        jButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String password = new String(passwordField.getPassword());
+                String Username = textField.getText();
+                if (Username.equals("123456") && password.equals("123456")){
+                    dispose();
+                    try {
+                        new mainView();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            }
+        });
 
         textField.addActionListener(new ActionListener() {
             @Override
@@ -34,8 +52,11 @@ public class SignInView extends JFrame {
 
                 if (Username.equals("123456") && password.equals("123456")){
                     dispose();
-                    new mainView();
-
+                    try {
+                        new mainView();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 }
 
 //                textArea.append("用户输入的密码是:" + password + newline);
@@ -51,6 +72,8 @@ public class SignInView extends JFrame {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new FlowLayout());
         centerPanel.add(new JScrollPane(textArea));
+        centerPanel.add(new JScrollPane(jButton));
         add(centerPanel, BorderLayout.CENTER);
+
     }
 }

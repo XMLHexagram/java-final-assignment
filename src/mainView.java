@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class mainView extends JFrame {
     //    private final JTextField textField = new JTextField(35);
@@ -12,10 +11,10 @@ public class mainView extends JFrame {
     private final static String newline = "\n";
 
 
-    public mainView() {
+    public mainView() throws IOException {
         this.setSize(700,700);
         this.setVisible(true);
-        class_ tempClass = new class_();
+        class_ tempClass = new class_(String::charAt);
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -44,7 +43,11 @@ public class mainView extends JFrame {
             public void mousePressed(MouseEvent e) {
                 super.mouseClicked(e);
                 dispose();
-                new randomStudentView();
+                try {
+                    new randomStudentView();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
 //        tempClass.output();

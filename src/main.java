@@ -1,4 +1,7 @@
+import java.io.*;
+import java.util.Objects;
 import java.util.Random;
+import java.util.function.BiFunction;
 
 public class main {
     public static void main(String[] args) {
@@ -6,8 +9,6 @@ public class main {
         frame.setTitle("登录");
         frame.pack();
         frame.setVisible(true);
-
-
     }
 }
 
@@ -137,15 +138,100 @@ class Student {
 class class_ {
     private Student[] aClass;
 
-    public class_() {
-        this.createClass();
+    public class_(BiFunction<String, Integer, Character> biFunction) throws IOException {
+//        this.createClass();
+        this.aClass = new Student[50];
+        int j = 0, k = 0;
+        String temp;
+        StringBuilder tempName = new StringBuilder();
+        StringBuilder tempHeight = new StringBuilder();
+        StringBuilder tempWeight = new StringBuilder();
+        StringBuilder tempClassName = new StringBuilder();
+        StringBuilder tempPhone = new StringBuilder();
+        StringBuilder tempID = new StringBuilder();
+
+        String json = readToString("store");
+        for (int i = 0; i < Objects.requireNonNull(json).length(); i++) {
+            if (json.charAt(i) != '|' && json.charAt(i) != '\n') {
+                switch (k) {
+                    case 1:
+                        tempName.append(json.charAt(i));
+                        break;
+                    case 2:
+                        tempHeight.append(json.charAt(i));
+                        break;
+                    case 3:
+                        tempWeight.append(json.charAt(i));
+                        break;
+                    case 4:
+                        tempClassName.append(json.charAt(i));
+                        break;
+                    case 5:
+                        tempPhone.append(json.charAt(i));
+                        break;
+                    case 6:
+                        tempID.append(json.charAt(i));
+                        break;
+                    default:
+                        break;
+                }
+            } else if (json.charAt(i) == '|') {
+                k++;
+            } else if (json.charAt(i) == '\n') {
+                this.aClass[j] = new Student();
+                System.out.println(tempName);
+//                System.out.println(aClass[i]);
+                aClass[j].setName(String.valueOf(tempName));
+                aClass[j].setHeight(Double.parseDouble(String.valueOf(tempHeight)));
+                aClass[j].setWeight(Double.parseDouble(String.valueOf(tempWeight)));
+                aClass[j].setClassName(String.valueOf(tempClassName));
+                aClass[j].setPhone(String.valueOf(tempPhone));
+                aClass[j].setID(String.valueOf(tempID));
+
+                tempName.setLength(0);
+                tempClassName.setLength(0);
+                tempHeight.setLength(0);
+                tempWeight.setLength(0);
+                tempClassName.setLength(0);
+                tempPhone.setLength(0);
+                tempID.setLength(0);
+                k = 0;
+                j++;
+            }
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println(aClass[15]);
+    }
+
+    public static String readToString(String fileName) {
+        String encoding = "UTF-8";
+        File file = new File(fileName);
+        Long filelength = file.length();
+        byte[] filecontent = new byte[filelength.intValue()];
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(filecontent);
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            return new String(filecontent, encoding);
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("The OS does not support " + encoding);
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String output() {
         this.findStudent("xiaoming", "19052220");
-        this.randomGetFive();
+//        this.randomGetFive();
         String temp = "";
-        for (int i = 0; i < aClass.length; i++) {
+        for (int i = 0; i < aClass.length && this.aClass[i] != null; i++) {
             temp = temp + aClass[i].toString() + "\n";
         }
         return temp;
@@ -160,9 +246,9 @@ class class_ {
     }
 
     public void findStudent(String name, String ID) {
-        for (int i = 0; i < this.aClass.length; i++) {
+        for (int i = 0; i < this.aClass.length && this.aClass[i] != null; i++) {
 
-            if (this.aClass[i].getName() == name && this.aClass[i].getID() == ID) {
+            if (this.aClass[i].getName().equals(name) && this.aClass[i].getID().equals(ID)) {
                 System.out.println("find");
                 this.aClass[i].PersonalInfo();
                 return;
@@ -178,6 +264,10 @@ class class_ {
         Boolean flag = true;
         int tempInt;
         int i;
+        int realLength = 0;
+        for (i=0;aClass[i]!=null;i++){
+            realLength = i;
+        }
         for (i = 0; i < 5; i++) {
             repeat[i] = 0;
         }
@@ -186,7 +276,7 @@ class class_ {
 //            System.out.println(Math.random());
 //            System.out.println(this.aClass.length);
 //            System.out.println(this.aClass);
-            tempInt = (int) (Math.random() * this.aClass.length);
+            tempInt = (int) (Math.random() * realLength);
             for (int j = 0; j < 5; j++) {
                 if (repeat[j] == tempInt) {
                     continue;
@@ -201,7 +291,7 @@ class class_ {
         }
         for (i = 0; i < 5; i++) {
             temp = temp + aClass[repeat[i]].toString() + "\n";
-            System.out.println(repeat[i]+"\n");
+            System.out.println(repeat[i] + "\n");
         }
         return temp;
     }
