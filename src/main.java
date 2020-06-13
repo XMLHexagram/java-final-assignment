@@ -47,12 +47,12 @@ class Student {
 
     @Override
     public String toString() {
-        return "学号是: " + this.getID() + "\n" +
-                "名字是: " + this.getName() + "\n" +
-                "班级是: " + this.getClassName() + "\n" +
-                "身高: " + this.getHeight() + "\n" +
-                "体重 " + this.getWeight() + "\n" +
-                "电话号码是: " + this.getPhone() + "\n";
+        return "\t学号是: \t" + this.getID() + "\n\t" +
+                "名字是: \t" + this.getName() + "\n\t" +
+                "班级是: \t" + this.getClassName() + "\n\t" +
+                "身高: \t" + this.getHeight() + "\n\t" +
+                "体重 \t" + this.getWeight() + "\n\t" +
+                "电话号码是: \t" + this.getPhone() + "\n\t";
 
 //        return "Student{}";
     }
@@ -142,7 +142,6 @@ class class_ {
 //        this.createClass();
         this.aClass = new Student[50];
         int j = 0, k = 0;
-        String temp;
         StringBuilder tempName = new StringBuilder();
         StringBuilder tempHeight = new StringBuilder();
         StringBuilder tempWeight = new StringBuilder();

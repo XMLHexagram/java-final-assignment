@@ -8,7 +8,7 @@ public class SignInView extends JFrame {
     private final JTextField textField = new JTextField(15);
     private final JPasswordField passwordField = new JPasswordField(15);
     private final JTextArea textArea = new JTextArea(6, 32);
-    private final JButton jButton = new JButton();
+    private final JButton jButton = new JButton("登录");
     private final static String newline = "\n";
 
     public SignInView() {
@@ -32,6 +32,8 @@ public class SignInView extends JFrame {
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
+                } else {
+                    JOptionPane.showConfirmDialog(null, "账户或者密码错误", "请重试", JOptionPane.YES_NO_OPTION);
                 }
             }
         });
