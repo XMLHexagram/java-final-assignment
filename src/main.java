@@ -1,7 +1,12 @@
+import java.nio.charset.Charset;
+import java.util.Random;
+
 public class main {
     public static void main(String[] args) {
-        test tester = new test();
-        tester.output();
+        class_ tempClass = new class_();
+        tempClass.output();
+        layout test = new layout();
+
     }
 }
 
@@ -14,7 +19,28 @@ class Student {
     private String ID = "134145123";
 
     public Student() {
+        this.name = randomString();
+        this.height = (int) (Math.random() * 100);
+        this.weight = (int) (Math.random() * 100);
+        this.className = randomString();
+        this.phone = randomString();
+        this.ID = randomString();
         System.out.println("done");
+    }
+
+    private String randomString() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        String generatedString = buffer.toString();
+        return generatedString;
     }
 
     public String getName() {
@@ -87,7 +113,7 @@ class Student {
         System.out.println(this.height + "cm");
         System.out.println(this.weight + "kg");
         System.out.println(this.className + "班");
-        System.out.println("phone" + this.phone);
+        System.out.println("phone:" + this.phone);
         System.out.println(this.ID);
         System.out.println();
     }
@@ -95,14 +121,13 @@ class Student {
 
 }
 
-class test {
+class class_ {
     Student[] aClass;
 
     public void output() {
         this.createClass();
         this.findStudent("xiaoming", "19052220");
         this.randomGetFive();
-
     }
 
     private void createClass() {
