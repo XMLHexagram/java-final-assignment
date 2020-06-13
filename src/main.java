@@ -100,23 +100,23 @@ class test {
 
     public void output() {
         this.createClass();
-        this.findStudent("xiaoming","19052220");
+        this.findStudent("xiaoming", "19052220");
+        this.randomGetFive();
 
     }
 
-    private void createClass(){
-        this.aClass = new Student[3];
+    private void createClass() {
+        this.aClass = new Student[30];
         for (int i = 0; i < this.aClass.length; i++) {
             this.aClass[i] = new Student();
-            this.aClass[i].PersonalInfo();
         }
-        this.aClass[0]= new Student("xiaoming",180,60,"19050522","18969067887","19052220");
+        this.aClass[0] = new Student("xiaoming", 180, 60, "19050522", "18969067887", "19052220");
     }
 
-    private void findStudent(String name,String ID){
+    private void findStudent(String name, String ID) {
         for (int i = 0; i < this.aClass.length; i++) {
 
-            if (this.aClass[i].getName() == name && this.aClass[i].getID() == ID){
+            if (this.aClass[i].getName() == name && this.aClass[i].getID() == ID) {
                 System.out.println("find");
                 this.aClass[i].PersonalInfo();
                 return;
@@ -124,5 +124,11 @@ class test {
         }
         System.out.println("can't find");
 
+    }
+
+    private void randomGetFive() {
+        for (int i = 0; i < 5; i++) {
+            this.aClass[(int) (Math.random() * this.aClass.length / 5) + (i * this.aClass.length / 5)].PersonalInfo();
+        }
     }
 }
