@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 public class main {
     public static void main(String[] args) {
         test tester = new test();
@@ -6,20 +8,73 @@ public class main {
 }
 
 class Student {
-    private String name;
-    private double height;
-    private double weight;
-    private String className;
-    private String phone;
-    private String ID;
+    private String name = "test";
+    private double height = 99;
+    private double weight = 99;
+    private String className = "testClass";
+    private String phone = "122251234";
+    private String ID = "134145123";
 
-    public Student(String name,double height,double weight,String className,String phone,String ID){
+    public Student() {
+        System.out.println("done");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public Student(String name, double height, double weight, String className, String phone, String ID) {
         this.name = name;
         this.phone = phone;
         this.weight = weight;
         this.height = height;
         this.className = className;
         this.ID = ID;
+        System.out.println("done");
     }
 
     public boolean isFat() {
@@ -29,22 +84,29 @@ class Student {
         return false;
     }
 
-    public void PersonalInfo(){
+    public void PersonalInfo() {
         System.out.println(this.name);
-        System.out.println(this.height+"cm");
-        System.out.println(this.weight+"kg");
-        System.out.println(this.className+"班");
-        System.out.println("phone"+this.phone);
+        System.out.println(this.height + "cm");
+        System.out.println(this.weight + "kg");
+        System.out.println(this.className + "班");
+        System.out.println("phone" + this.phone);
         System.out.println(this.ID);
+        System.out.println();
     }
 
 
 }
 
 class test {
-    public void output(){
-        Student xiaoming = new Student("xiaoming",180,60,"19050522","18969067887","19052220");
-        xiaoming.PersonalInfo();
-        System.out.println(xiaoming.isFat());
+    public void output() {
+//        Student xiaoming = new Student("xiaoming",180,60,"19050522","18969067887","19052220");
+//        xiaoming.PersonalInfo();
+//        System.out.println(xiaoming.isFat());
+        Student[] aClass = new Student[3];
+        for (int i = 0; i < aClass.length; i++) {
+            aClass[i] = new Student();
+            aClass[i].PersonalInfo();
+        }
+
     }
 }
