@@ -47,7 +47,7 @@ public class UserAggregate {
 
         String user = readToString("user");
         for (int i = 0; i < Objects.requireNonNull(user).length(); i++) {
-            if (user.charAt(i) != '|' && user.charAt(i) != '\n') {
+            if (user.charAt(i) != '|' && user.charAt(i) != '\n' && user.charAt(i)!='\r') {
                 switch (k) {
                     case 1:
                         tempName.append(user.charAt(i));
@@ -76,11 +76,48 @@ public class UserAggregate {
         System.out.println(this.allUser[0].getUserName());
     }
 
-    public Boolean isHasRightUser(String tempUserName,String tempPassword) {
-        System.out.println(2);
+    public Boolean ChangePassword(String UserName,String OldPassword,String NewPassword) throws IOException {
+        int No = 0;
         for (int i = 0; i < allUser.length && allUser[i] != null; i++) {
-            System.out.println(1);
-            if (tempPassword.equals(allUser[i].getPassword()) && tempUserName.equals(allUser[i].getPassword())){
+            if (UserName.equals(allUser[i].getUserName())){
+                No = i;
+                break;
+            }
+        }
+        System.out.println("aa");
+        System.out.println(allUser[No].getPassword());
+        System.out.println("aa");
+        if (OldPassword.equals(allUser[No].getPassword())){
+            allUser[No].setPassword(NewPassword);
+            WriteIntoFile();
+            return true;
+        }
+        return false;
+    }
+
+    public void WriteIntoFile() throws IOException {
+//        System.out.println("Stsesetsdg");
+        StringBuilder toWrite= new StringBuilder();
+        for (int i=0;i<allUser.length && allUser[i]!=null;i++){
+            toWrite.append("|").append(allUser[i].getUserName()).append("|").append(allUser[i].getPassword()).append("\n");
+        }
+
+        System.out.println(toWrite);
+        FileWriter f = new FileWriter("user");
+        f.write(toWrite.toString());
+        f.close();
+
+    }
+
+    public Boolean isHasRightUser(String tempUserName,String tempPassword) {
+//        tempPassword+=" ";
+//        System.out.printf("1");
+//        System.out.println((int)allUser[0].getPassword().toCharArray()[6]);
+//        System.out.printf("1");
+        System.out.println(tempPassword);
+        System.out.println(tempUserName);
+        for (int i = 0; i < allUser.length && allUser[i] != null; i++) {
+            if (tempPassword.equals(allUser[i].getPassword()) && tempUserName.equals(allUser[i].getUserName())){
                 return true;
             }
         }

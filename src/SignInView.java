@@ -26,7 +26,7 @@ public class SignInView extends JFrame {
                 String password = new String(passwordField.getPassword());
                 String Username = textField.getText();
                 UserAggregate tempUser = new UserAggregate();
-                if (!tempUser.isHasRightUser(Username, password)) {
+                if (tempUser.isHasRightUser(Username, password)) {
                     dispose();
                     try {
                         new mainView();
@@ -34,7 +34,7 @@ public class SignInView extends JFrame {
                         ioException.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showConfirmDialog(null, "账户或者密码错误", "请重试", JOptionPane.YES_NO_OPTION);
+                    JOptionPane.showConfirmDialog(null, "账户或者密码错误", "请重试", JOptionPane.OK_OPTION);
                 }
             }
         });
@@ -54,7 +54,7 @@ public class SignInView extends JFrame {
                 String Username = textField.getText();
 
                 UserAggregate tempUser = new UserAggregate();
-                if (!tempUser.isHasRightUser(Username, password)) {
+                if (tempUser.isHasRightUser(Username, password)) {
                     dispose();
                     try {
                         new mainView();
