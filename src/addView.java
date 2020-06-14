@@ -27,7 +27,7 @@ public class addView extends JFrame {
 
     public addView() {
         this.setTitle("添加学生信息");
-        this.setSize(200,500);
+        this.setSize(200, 500);
         this.setVisible(true);
         setLayout(new BorderLayout());
 
@@ -52,6 +52,39 @@ public class addView extends JFrame {
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Student tempStu = new Student();
+
+                tempStu.setName(nameField.getText());
+                tempStu.setHeight(Double.parseDouble(heightField.getText()));
+                tempStu.setWeight(Double.parseDouble(weightField.getText()));
+                tempStu.setClassName(classNameField.getText());
+                tempStu.setPhone(phoneField.getText());
+                tempStu.setID(IDField.getText());
+                tempStu.setEnglish(Double.parseDouble(EnglishField.getText()));
+                tempStu.setChinese(Double.parseDouble(ChineseField.getText()));
+                tempStu.setMath(Double.parseDouble(MathField.getText()));
+                tempStu.setPhysics(Double.parseDouble(PhysicsField.getText()));
+                tempStu.setChemical(Double.parseDouble(chemicalField.getText()));
+                tempStu.setBiology(Double.parseDouble(BiologyField.getText()));
+                tempStu.setHistory(Double.parseDouble(HistoryField.getText()));
+                tempStu.setComputer(Double.parseDouble(ComputerField.getText()));
+                tempStu.setSports(Double.parseDouble(SportsField.getText()));
+                tempStu.setWorld(Double.parseDouble(WorldField.getText()));
+
+                try {
+                    class_ temp = new class_(String::charAt);
+                    System.out.println(tempStu);
+                    if (!temp.addStudent(tempStu)) {
+                        JOptionPane.showConfirmDialog(null, "发生异常请重试", "error", JOptionPane.OK_OPTION);
+                    } else {
+                        dispose();
+                        JOptionPane.showConfirmDialog(null, "添加完成", "success", JOptionPane.OK_OPTION);
+                        new mainView();
+                    }
+
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
 
             }
         });

@@ -154,7 +154,7 @@ class class_ {
 
     public boolean deleteOne(String tempID) throws IOException {
         for (int i = 0; i < aClass.length && aClass[i] != null; i++) {
-            if (aClass[i].getID().equals(tempID)){
+            if (aClass[i].getID().equals(tempID)) {
                 aClass = delete(i, aClass);
                 WriteIntoFile();
                 return true;
@@ -172,6 +172,20 @@ class class_ {
         return arrNew;
     }
 
+    public boolean addStudent(Student tempStu) throws IOException {
+        int maxIndex = 0;
+        for (int i = 0;i < aClass.length && aClass[i] != null;i++){
+            if (aClass[i].getID().equals(tempStu.getID())){
+                return false;
+            }
+            maxIndex = i;
+        }
+
+        aClass[maxIndex+1]=tempStu;
+        WriteIntoFile();
+        return true;
+    }
+
     public void WriteIntoFile() throws IOException {
         StringBuilder toWrite = new StringBuilder();
         for (int i = 0; i < aClass.length && aClass[i] != null; i++) {
@@ -182,7 +196,7 @@ class class_ {
                     append("|").
                     append(aClass[i].getWeight()).
                     append("|").
-                    append(aClass[i].getClass()).
+                    append(aClass[i].getClassName()).
                     append("|").
                     append(aClass[i].getPhone()).
                     append("|").

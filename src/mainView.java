@@ -63,6 +63,7 @@ public class mainView extends JFrame {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 new addView();
+                dispose();
             }
         });
 
