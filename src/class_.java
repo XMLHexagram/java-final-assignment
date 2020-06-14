@@ -40,7 +40,7 @@ class class_ {
                         break;
                     case 2:
                         tempHeight.append(json.charAt(i));
-                        System.out.println("test："+tempHeight);
+                        System.out.println("test：" + tempHeight);
                         break;
                     case 3:
                         tempWeight.append(json.charAt(i));
@@ -141,18 +141,40 @@ class class_ {
 //        System.out.println(aClass[15]);
 
     }
-public void changeOne(Student temp) throws IOException {
-        for (int i=0;i<aClass.length && aClass[i] != null;i++){
-            if (temp.getID().equals(aClass[i].getID())){
-                aClass[i]=temp;
+
+    public void changeOne(Student temp) throws IOException {
+        for (int i = 0; i < aClass.length && aClass[i] != null; i++) {
+            if (temp.getID().equals(aClass[i].getID())) {
+                aClass[i] = temp;
                 break;
             }
         }
         WriteIntoFile();
-}
+    }
+
+    public boolean deleteOne(String tempID) throws IOException {
+        for (int i = 0; i < aClass.length && aClass[i] != null; i++) {
+            if (aClass[i].getID().equals(tempID)){
+                aClass = delete(i, aClass);
+                WriteIntoFile();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Student[] delete(int index, Student array[]) {
+        Student[] arrNew = new Student[array.length - 1];
+        for (int i = index; i < array.length - 1; i++) {
+            array[i] = array[i + 1];
+        }
+        System.arraycopy(array, 0, arrNew, 0, arrNew.length);
+        return arrNew;
+    }
+
     public void WriteIntoFile() throws IOException {
-        StringBuilder toWrite= new StringBuilder();
-        for (int i=0;i<aClass.length && aClass[i]!=null;i++){
+        StringBuilder toWrite = new StringBuilder();
+        for (int i = 0; i < aClass.length && aClass[i] != null; i++) {
             toWrite.append("|").
                     append(aClass[i].getName()).
                     append("|").
