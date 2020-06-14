@@ -69,7 +69,18 @@ public class mainView extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                new modifyView();
+                String strID = JOptionPane.showInputDialog("请输入要修改的学生ID");
+                try {
+                    class_ temp = new class_(String::charAt);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                if (tempClass.findStudent(strID) != null){
+                    new modifyView(tempClass.findStudent(strID));
+                    dispose();
+                }else {
+                    JOptionPane.showConfirmDialog(null, "出现异常请重试", "请重试", JOptionPane.OK_OPTION);
+                }
             }
         });
 
