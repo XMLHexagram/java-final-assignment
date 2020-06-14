@@ -140,6 +140,10 @@ class class_ {
 
     public class_(BiFunction<String, Integer, Character> biFunction) throws IOException {
 //        this.createClass();
+        readFromFile();
+    }
+
+    public void readFromFile() {
         this.aClass = new Student[50];
         int j = 0, k = 0;
         StringBuilder tempName = new StringBuilder();
@@ -201,6 +205,7 @@ class class_ {
         System.out.println();
         System.out.println();
         System.out.println(aClass[15]);
+
     }
 
     public static String readToString(String fileName) {
@@ -264,7 +269,7 @@ class class_ {
         int tempInt;
         int i;
         int realLength = 0;
-        for (i=0;aClass[i]!=null;i++){
+        for (i = 0; aClass[i] != null; i++) {
             realLength = i;
         }
         for (i = 0; i < 5; i++) {

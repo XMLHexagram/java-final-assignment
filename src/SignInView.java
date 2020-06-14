@@ -25,7 +25,8 @@ public class SignInView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String password = new String(passwordField.getPassword());
                 String Username = textField.getText();
-                if (Username.equals("123456") && password.equals("123456")){
+                UserAggregate tempUser = new UserAggregate();
+                if (!tempUser.isHasRightUser(Username, password)) {
                     dispose();
                     try {
                         new mainView();
@@ -52,7 +53,8 @@ public class SignInView extends JFrame {
                 String password = new String(passwordField.getPassword());
                 String Username = textField.getText();
 
-                if (Username.equals("123456") && password.equals("123456")){
+                UserAggregate tempUser = new UserAggregate();
+                if (!tempUser.isHasRightUser(Username, password)) {
                     dispose();
                     try {
                         new mainView();
