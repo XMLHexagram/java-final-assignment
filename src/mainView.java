@@ -22,9 +22,11 @@ public class mainView extends JFrame {
         setJMenuBar(menuBar);
         JMenu menu1 = new JMenu("查看");
         JMenu menu2 = new JMenu("修改密码");
+        JMenu menu4 = new JMenu("修改信息");
         JMenu menu3 = new JMenu("杂谈");
         menuBar.add(menu1);
         menuBar.add(menu2);
+        menuBar.add(menu4);
         menuBar.add(menu3);
         JMenuItem item1 = new JMenuItem("查看随机五名学生");
         JMenuItem item2 = new JMenuItem("不想署名的作者：Hexagram");
@@ -39,6 +41,37 @@ public class mainView extends JFrame {
         menu3.add(item5);
         menu3.addSeparator();
         menu3.add(item6);
+
+        JMenuItem item7 = new JMenuItem("添加学生信息");
+        JMenuItem item8 = new JMenuItem("修改学生信息");
+        JMenuItem item9 = new JMenuItem("删除学生信息");
+        menu4.add(item7);
+        menu4.add(item8);
+        menu4.add(item9);
+
+        item9.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                new deleteView();
+            }
+        });
+
+        item7.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                new addView();
+            }
+        });
+
+        item8.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                new modifyView();
+            }
+        });
 
         menu2.addMenuListener(new MenuListener() {
             @Override
